@@ -1,2 +1,4 @@
-def place_bet(game):
-    print(f"Placing bet on {game['team']} with odds {game['odds']}")
+def simulate_bets(bets):
+    # Print out bet info as a simulation will be replaced by actual automation later just testing rn
+    for bet in bets:
+        print(f"Simulated bet on {bet['team']} with odds {bet['odds']}")

@@ -1,18 +1,19 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
+from config import Config
 
+# create db instance
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../database/db.sqlite3'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_object(Config)
 
+    # initialize db with app context
     db.init_app(app)
 
-    with app.app_context():
-        from . import routes
-        db.create_all()
+    # register main blueprint for routes
+    from .routes import bp as routes_bp
+    app.register_blueprint(routes_bp)
 
     return app
